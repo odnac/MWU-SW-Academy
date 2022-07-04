@@ -7,6 +7,12 @@
     즉, 중복 선언이 사능하다.
 */
 
+/*  const와 let의 차이
+    
+    const는 변수 재선언, 변수 재할당 모두 불가능하다.
+    let은 변수 재할당만 가능하다.
+*/
+
 //변수 let
 let aV = 10;
 let bV = 10;
@@ -56,9 +62,8 @@ let a; //undefined
 let b = null; //null
 
 
-/*
-   
-    메모리
+/*  메모리
+
     할당 -> 사용 -> 해제
     Garbage Collector를 통해 메모리 해제
 */
@@ -155,4 +160,72 @@ for(const key in obj3){
     console.log(key, obj3[key]);
 }
 
-/*  9 스코프와 클로저 */
+/*  9 스코프와 클로저 
+
+    유효범위 
+        1) 전역 스코프 : 스크립트 전체에서 참조되는 것을 의미하며, 어느 곳에서든 참조 된다.
+        2) 지역 스코프 : 정의된 함수 내에서만 참조되는 것을 의미하며, 밖에서는 참조 되지 않는다.
+
+    클로저 : 내부함수는 외부함수의 지역변수에 접근 할 수 있는데 외부함수의 실행이 끝나서 
+    외부함수가 소멸된 이후에도 내부함수가 외부함수의 변수에 접근 할 수 있다.
+*/
+
+// 변수명 중복 허용
+var x = 0;
+{
+    var x = 1;
+    console.log(x); // 1
+}
+console.log(x); // 1
+let y = 0;
+{
+    let y = 1;
+    console.log(y); // 1
+}
+console.log(y); // 0
+
+//function-level scope
+var global = 'global';
+
+function foo() {
+    var local = 'local';
+    console.log(global); // global
+    console.log(local); // local
+}
+foo();
+
+console.log(global); // global
+console.log(local); // error
+
+//암묵적 전역 : 명시적으로 변수 앞에 var를 붙여주지 않으면 암묵적 전역변수가 된다.
+function foo1() {
+    x = 1;      // 암묵적 전역
+    var y = 2;
+}
+foo1();
+console.log(x); // 1
+console.log(y); // y is not defined
+
+//Lexical scoping
+    //ex1
+    var number = 1234
+
+    function printNumber() {
+        console.log(number);
+    }
+    function wrapper() {
+        number = 4321   //var가 없음
+        printNumber();
+    }
+    wrapper(); // 4321
+    
+    //ex2
+    var number = 1234
+    function printNumber() {
+        console.log(number);
+    }
+    function wrapper() {
+        var number = 4321   //var가 있음
+        printNumber();
+    }
+    wrapper(); //1234
