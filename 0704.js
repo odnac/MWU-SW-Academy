@@ -30,7 +30,7 @@ let inf = 1 / 0
 //String
 let s1 = "'String'";
 let s2 = '"Stirng"';
-let s3 = '-${s2}-'; // 백틱 https://curryyou.tistory.com/185
+let s3 = `-${s2}-`; // 백틱 https://curryyou.tistory.com/185
 let s4 = 'I\'m String';
 console.log(s3); 
 
