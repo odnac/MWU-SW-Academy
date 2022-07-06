@@ -79,16 +79,3 @@ linkedList.display();
 linkedList.insert(linkedList.find(2), 10);
 linkedList.remove(3);
 linkedList.display();
-
-
-/*  과제
-
-단일 연결 리스트 예외 처리
-단일 연결 리스트 크기 구하는 size 메소드 구현
-
-이중 연결 리스트 구현
-
-단일 연결 리스트를 이용해 환형연결 리스트 구현
-탐색 종료 조건이 있어야함
-
-*/
