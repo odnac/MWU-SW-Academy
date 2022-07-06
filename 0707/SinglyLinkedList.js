@@ -63,7 +63,12 @@ class SinglyLinkedList {
     }
     //리스트의 크기를 구하는 메소드
     size() {
-
+        // let currNode = this.head;
+        // let count = 0;
+        // while (currNode.head == null) {
+        //     count++;
+        // }
+        // return count;
     }
 }
 
@@ -79,3 +84,4 @@ linkedList.display();
 linkedList.insert(linkedList.find(2), 10);
 linkedList.remove(3);
 linkedList.display();
+linkedList.size();
