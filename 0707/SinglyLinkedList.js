@@ -14,11 +14,16 @@ class SinglyLinkedList {
     }
     // 찾기
     find(value) {
-        let currNode = this.head;
-        while (currNode.value !== value) {
-            currNode = currNode.next;
+        try{
+            let currNode = this.head;
+            while (currNode.value !== value) {
+                currNode = currNode.next;
+            }
+            return currNode;
         }
-        return currNode;
+        catch(e) {
+            console.log("찾는 값이 노드에 없습니다.");
+        }
     }
     // 마지막에 추가
     append(newValue) {
@@ -34,19 +39,30 @@ class SinglyLinkedList {
     }
     // 중간 삽입
     insert(node, newValue) {
-        const newNode = new Node(newValue);
-        newNode.next = node.next;
-        node.next = newNode;
+        try {
+            const newNode = new Node(newValue);
+            newNode.next = node.next;
+            node.next = newNode;
+        }
+        catch(e){
+            console.log("값이 맞는 노드가 없어 새로운 값을 삽입하지 못하였습니다.");
+        }
+      
     }
     // 삭제
     remove(value) {
-        let prevNode = this.head;
-        while(prevNode.next.value !== value) {
-            prevNode = prevNode.next;
+        try {
+            let prevNode = this.head;
+            while(prevNode.next.value !== value) {
+                prevNode = prevNode.next;
+            }
+    
+            if (prevNode.next !== null) {
+                prevNode.next = prevNode.next.next;
+            }
         }
-
-        if (prevNode.next !== null) {
-            prevNode.next = prevNode.next.next;
+        catch(e) {
+            console.log("노드에 없는 value를 입력하여 삭제된 노드가 없습니다.");
         }
     }
     
@@ -63,12 +79,13 @@ class SinglyLinkedList {
     }
     //리스트의 크기를 구하는 메소드
     size() {
-        // let currNode = this.head;
-        // let count = 0;
-        // while (currNode.head == null) {
-        //     count++;
-        // }
-        // return count;
+        let count = 0;
+        let currNode = this.head;
+        while(currNode != null) {
+            currNode = currNode.next
+            count++;
+        }
+        console.log(count);
     }
 }
 
@@ -78,10 +95,10 @@ linkedList.append(2);
 linkedList.append(3);
 linkedList.append(5);
 linkedList.display();
-console.log(linkedList.find(3));
+console.log(linkedList.find(122));
 linkedList.remove(5);
 linkedList.display();
-linkedList.insert(linkedList.find(2), 10);
-linkedList.remove(3);
+linkedList.insert(linkedList.find(1221), 4);
+linkedList.remove(100);
 linkedList.display();
 linkedList.size();
