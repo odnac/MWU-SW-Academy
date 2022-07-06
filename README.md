@@ -1,3 +1,3 @@
 # MWU-SW-Academy
 
-https://www.notion.so/JS-dda5ec77c15a426a857f5f9709e4dbbc
+https://www.notion.so/cancode/MWU-SW-ACADEMY-6799973510ee44dbbe3a69fa2a15c4bd
