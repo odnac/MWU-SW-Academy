@@ -1,4 +1,3 @@
-//// SinglyLinkedList
 //노드
 class Node {
     constructor(value) {
