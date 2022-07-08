@@ -73,7 +73,20 @@ class DoublyLinkedList {
         }
         this.size++;
     }
-    //삭제
+    // 삭제 - 값
+    remove(value) {
+        let current = this.head;
+        // 리스트의 head일 때 == 맨 앞 노드 삭제
+        if(current.value == value) {
+            this.head = current.next;
+            this.size--;
+        }
+        else{
+            let prev = current;
+            
+        }
+    }
+    // 삭제 - 인덱스
     //탐색
     findFromHead(value) {
         try{

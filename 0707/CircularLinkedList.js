@@ -51,22 +51,7 @@ class CircularLinkedList {
       
     }
     // 삭제
-    remove(value) {
-        try {
-            let prevNode = this.head;
-            while(prevNode.next.value !== value) {
-                prevNode = prevNode.next;
-            }
-    
-            if (prevNode.next !== null) {
-                prevNode.next = prevNode.next.next;
-            }
-        }
-        catch(e) {
-            console.log("노드에 없는 value를 입력하여 삭제된 노드가 없습니다.");
-        }
-    }
-    
+  
     display() {
         let currNode = this.head;
         let displayStirng = "[";
