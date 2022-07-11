@@ -42,6 +42,7 @@ function solution(priorities, location) {
     }
     //내림차순 정렬
     priorities.sort((a,b) => b - a);
+    // priorties.sort(function(a,b) { return b - a });
     
     let count = 0 ;
     while(true) {

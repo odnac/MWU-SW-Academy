@@ -83,4 +83,3 @@ sessionStorage.removeItem('name');
 sessionStorage.clear();
 
 /*  6 DOM */
-황재호

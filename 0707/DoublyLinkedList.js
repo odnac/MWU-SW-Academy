@@ -83,7 +83,7 @@ class DoublyLinkedList {
         }
         else{
             let prev = current;
-            
+
         }
     }
     // 삭제 - 인덱스
@@ -132,6 +132,7 @@ DlinkedList.backInsert(30);
 DlinkedList.frontInsert(20);
 DlinkedList.backInsert(40);
 DlinkedList.frontInsert(10);
+
 //여기부터 출력
 console.log("리스트의 크기 :", DlinkedList.size);
 DlinkedList.findFromTail(30);

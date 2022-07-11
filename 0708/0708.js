@@ -213,13 +213,13 @@ console.log(cqueue.isFull());
 
 // Array 해시 테이블    <= 추천 안함
 const tableA = [];
-Atable["key"] = 100;
-Atable["key2"] = "Hello";
-console.log(Atable["key"]); // 100
-Atable["key"] = 349;
-console.log(tAable["key"]); //349
-delete Atable["key"];
-console.log(Atable["key"]); // undefined
+tableA["key"] = 100;
+tableA["key2"] = "Hello";
+console.log(tableA["key"]); // 100
+tableA["key"] = 349;
+console.log(tableA["key"]); //349
+delete tableA["key"];
+console.log(tableA["key"]); // undefined
 
 // Object 해시 테이블   <= 제일간단하고 정석적인 방법
 const tableO = {};
