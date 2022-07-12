@@ -187,3 +187,96 @@ console.log(arraySort); // 2, 3, 3, 5, 8, 9, 10
 
 arraySort.sort((a,b) => b - a); // 내림차순 정렬
 console.log(array); // 10, 9, 8, 5, 3, 3, 2
+
+/*  6. 이진 탐색 */
+
+////배열을 이용한 이진 탐색트리
+const arrayB = [1, 1, 5, 124, 400, 599, 1004, 2876, 8712];
+
+function binarySearch(array, findValue) {
+    let left = 0;
+    let right = array.length - 1;
+    let mid = Math.floor((left + right) / 2);
+    while(left < right){
+        if(array[mid] === findValue){
+            return mid;
+        }
+        if(array[mid] < findValue) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+        mid = Math.floor((left + right) / 2);
+    }
+    return -1;
+}
+
+console.log(binarySearch(arrayB, 2876));
+console.log(binarySearch(arrayB, 1)); 
+console.log(binarySearch(arrayB, 500));
+
+////이진탐색트리를 이용하는 방법
+class NodeB {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+class binarySearchTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(value) {
+        const newNode = new NodeB(value);
+        if(this.root === null) {
+            this.root = newNode;
+            return ;
+        }
+        let currenNodeB = this.root;
+        while(currenNodeB !== null) {
+            if(currenNodeB.value < value){
+                if(currenNodeB.right === null) {
+                    currenNodeB.right = newNode;
+                    break;
+                }
+                currenNodeB = currenNodeB.right;
+            }
+            else{
+                if(currenNodeB.left === null) {
+                    currenNodeB.left = newNode;
+                    break;
+                }
+                currenNodeB = currenNodeB.left;
+            }
+        }
+    }
+    has(value){
+        let currenNodeB = this.root;
+        while(currenNodeB !== null) {
+            if(currenNodeB.value === value){
+                return true;
+            }
+            if(currenNodeB.value < value){
+                currenNodeB = currenNodeB.right;
+            }
+            else{
+                currenNodeB = currenNodeB.left;
+            }
+        }
+        return false;
+    }
+}
+
+const treeB = new binarySearchTree();
+treeB.insert(5);
+treeB.insert(4);
+treeB.insert(7);
+treeB.insert(8);
+treeB.insert(5);
+treeB.insert(6);
+treeB.insert(2);
+console.log(treeB.has(8)); // true
+console.log(treeB.has(1)); // false
