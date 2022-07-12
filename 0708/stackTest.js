@@ -14,23 +14,20 @@ function solution(s) {
     }
     return stack.length === 0; // 참이면 true, 거짓이면 false
 }
+//스택 없이 더 최적화 된 코드
+function solution2(s) {
+    let count = 0 ;
 
-/*
-    스택 없이 더 최적화 된 코드
-    function solution(s) {
-        let count 0 ;
-
-        for( const c of s){
-            if(c === '(') {
-                count++;
-            }
-            else {
-                if(count === 0) {
-                    return false;
-                }
-                count--;
-            }
+    for( const c of s){
+        if(c === '(') {
+            count++;
         }
-        return count === 0;
+        else {
+            if(count === 0) {
+                return false;
+            }
+            count--;
+        }
     }
- */
+    return count === 0;
+}

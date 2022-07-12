@@ -107,6 +107,7 @@ class MaxHeap {
     }
 }
 
+console.log("gllllllllllllllllllllllllllllllll")
 const heap = new MaxHeap();
 heap.push(45);
 heap.push(36);

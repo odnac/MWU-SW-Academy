@@ -38,7 +38,7 @@ function solution(priorities, location) {
     const queue = new Queue();
     
     for(let i = 0 ; i < priorities; i+=1){
-        queue.enqueue([priorities[i], i]); // 인덱스와 우선순위를 넣어준다.. enqueue의 매개변수는 1개인데 이게 돼?
+        queue.enqueue([priorities[i], i]); // 배열 인덱스로 준다.
     }
     //내림차순 정렬
     priorities.sort((a,b) => b - a);
@@ -58,5 +58,4 @@ function solution(priorities, location) {
             }
         }
     }
-
 }
