@@ -1,6 +1,6 @@
 // params.$target - 해당 컴포넌트가 추가가 될 DOM 엘리먼트
 // Params.initialState - 해당 컴포넌트의 초기 상태
-function todoList(params) {
+function todoList1(params) {
     const $todoList = document.createElement('div');
     const $target = params.$target;
     $target.appendChild($todoList);
@@ -37,4 +37,5 @@ function todoList(params) {
             $todoList.innerHTML = html;
         */
     }
+    this.render();
 }
