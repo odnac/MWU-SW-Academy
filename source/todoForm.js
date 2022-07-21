@@ -1,4 +1,4 @@
-function todoFrom({ $target, onSubmit }){
+export default function todoFrom({ $target, onSubmit }){
     const $from = document.createElement('form') // 폼 생성. todoForm을 new할 때 document element로 폼을 만들고
 
     $target.appendChild($from) // target에 appendchild로 추가함

@@ -1,4 +1,9 @@
-function App({ $target, initialState}) {
+import Header from './Header.js'
+import todoFrom from './todoForm.js'
+import todoList from './todoList.js'
+import { setItem } from './storage.js'
+
+export default function App({ $target, initialState}) {
     new Header({ 
         $target, text: 'Simple Todo List'
     })
@@ -11,7 +16,7 @@ function App({ $target, initialState}) {
             }]
             todolist.setState(nextState)
 
-            storage.setItem('todos', JSON.stringify(nextState))
+            setItem('todos', JSON.stringify(nextState))
         }
     })
 
