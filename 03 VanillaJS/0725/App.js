@@ -27,13 +27,21 @@ export default function App({ $app }) {
                 ...this.state,
                 selectedTodo
             })
-            
+
             // 댓글 목록 불러오기
-            const data = await request('https://kdt.roto.codes/comments?todo.id=${id}')
-            this.setState({
-                 ...this.state,
-                 comments
-            })
+            try {
+                // 로딩 중 보여주기 처리
+                const data = await request('https://kdt.roto.codes/comments?todo.id=${id}')
+                this.setState({
+                    ...this.state,
+                    comments
+                })
+            } catch(e) {
+                // promise의 .catch와 비슷한 역할
+            } finally {
+                // promise의 .finally와 비슷한 역할
+                // 로딩 중 숨겨주는 처리
+            }
         }
     })
     
