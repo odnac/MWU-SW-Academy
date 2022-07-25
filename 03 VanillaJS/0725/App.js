@@ -21,7 +21,7 @@ export default function App({ $app }) {
     const todolist = new todoList({
         $target: $app,
         initialState: this.todos,
-        onClick: id => {
+        onClick: async (id) => {
             const selectedTodo = this.state.todos.find(todo => todo.id === id)
             this.setState({
                 ...this.state,
@@ -29,12 +29,10 @@ export default function App({ $app }) {
             })
             
             // 댓글 목록 불러오기
-            request('https://kdt.roto.codes/comments?todo.id=${id}')
-            .then(comments => {
-                this.setState({
-                    ...this.state,
-                    comments
-                })
+            const data = await request('https://kdt.roto.codes/comments?todo.id=${id}')
+            this.setState({
+                 ...this.state,
+                 comments
             })
         }
     })
@@ -48,13 +46,11 @@ export default function App({ $app }) {
     })
 
     //todos 불러오기
-    this.init = () => {
-        request('https://kdt.roto.codes/todos') 
-            .then((todos) => {
-                this.setState({
-                    ...this.state,
-                    todos
-                })
+    this.init = async () => {
+        const data = await request('https://kdt.roto.codes/todos') 
+            this.setState({
+                ...this.state,
+                todos: data
             })
     }
 
