@@ -49,12 +49,13 @@ export default function App({ $app }) {
 
     //todos 불러오기
     this.init = () => {
-        request('https://kdt.roto.codes/todos', (todos) => {
-            this.setState({
-                ...this.state,
-                todos
+        request('https://kdt.roto.codes/todos') 
+            .then((todos) => {
+                this.setState({
+                    ...this.state,
+                    todos
+                })
             })
-        })
     }
 
     this.init()
