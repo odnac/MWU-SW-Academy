@@ -1,36 +1,10 @@
-<!-- 0727 history API 3 -->
+<!-- 0727 index.html -->
 <html>
+    <head>
+        <title>fetch API</title>
+    </head>
     <body>
-        <div id="container"></div>
-        <a class="LinkItem" href="/product-list">product list</a>
-        <a class="LinkItem" href="/article-list">article list</a>
-        <script>
-            function route() {
-                const { pathname } = location
-                const $container = document.querySelector('#container')
-                    if(pathname === '/') {
-                        $container.innerHTML = '<h1>Home</h1>'
-                    } else if( pathname === '/product-list') {
-                        $container.innerHTML = '<h1>상품 목록</h1>'
-                    } else if (pathname === '/article-list') {
-                        $container.innerHTML = '<h1>게시글 목록</h1>'
-                    }
-            }
-            route()
-            window.addEventListener('click', e => {
-                if(e.target.className === 'LinkItem') {
-                    e.preventDefault() // LinkItem을 클릭했을 시 404 에러 안뜨게 함
-
-                    const {href} = e.target 
-                    const path = href.replace(window.location.origin, '')  // url 고정주소?(=origin: ....8080)을 빼고 보여줌
-
-                    history.pushState(null, null, path) // url 바뀜
-                    route()
-                }
-            })
-
-            //뒤로 가기 앞으로 가기 이벤트
-            window.addEventListener('popstate', () => route())
-        </script>
+        <main id = "app"></main>
+        <script src="./source/main.js" type="module"></script>
     </body>
 </html>

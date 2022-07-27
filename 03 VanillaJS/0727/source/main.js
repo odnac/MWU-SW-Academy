@@ -1,10 +1,5 @@
-import ProductPage from "./ProductPage.js"
+import App from './App.js'
 
-const $target = document.querySelector("#app")
+const $target = document.querySelector('#app')
 
-new ProductPage({
-    $target,
-    initialState: {
-        productId: 1
-    }
-})
+new App({ $target })
