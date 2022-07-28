@@ -8,7 +8,8 @@ export default function App({
 }) {
     this.state = {
         username: 'roto',
-        todos: []
+        todos: [],
+        isTodoLoading: false
     }
 
     new Header({
@@ -41,12 +42,18 @@ export default function App({
     this.setState = nextState => {
         this.state = nextState
 
-        todoList.setState(this.state.todos)
+        todoList.setState({
+            isTodoLoading: this.state.isTodoLoading,
+            todos: this.state.todos
+        })
     }
 
     const todoList = new TodoList({
         $target,
-        initialState: this.state.todos,
+        initialState: {
+            isTodoLoading: this.state.isTodoLoading,
+            todos: this.state.todos,
+        },
         onToggle: (id) => {
             alert(`${id} 토글 예정`)
         },
@@ -59,10 +66,15 @@ export default function App({
         const { username } = this.state
 
         if(username) {
+            this.setState({
+                ...this.state,
+                isTodoLoading: true
+            })
             const todos = await request(`/${username}?delay=5000`)
             this.setState({
                 ...this.state,
-                todos
+                todos,
+                isTodoLoading: false
             })
         }
     }
