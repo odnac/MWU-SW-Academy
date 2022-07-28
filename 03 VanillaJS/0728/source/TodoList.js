@@ -1,9 +1,9 @@
-export default function TodoList({ $target, initailState, onToggle, onRemove}) {
+export default function TodoList({ $target, initialState, onToggle, onRemove}) {
     const $todo = document.createElement('div')
 
     $target.appendChild($todo)
 
-    this.state = initailState
+    this.state = initialState
 
     this.setState = (nextState) =>{
         this.state = nextState
@@ -15,7 +15,7 @@ export default function TodoList({ $target, initailState, onToggle, onRemove}) {
             $todo.innerHTML = `Todo가 없습니다!`
             return
         }
-        
+
         $todo.innerHTML = `
             <ul>
                 ${this.state.map(({ _id, content, isCompleted}) => `

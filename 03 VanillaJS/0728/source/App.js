@@ -1,10 +1,19 @@
+import Header from "./Header.js"
 import TodoForm from "./TodoForm.js"
 import TodoList from "./TodoList.js"
 
 export default function App({
     $target
 }) {
-    
+    this.state = {
+        username: 'roto',
+        todos: []
+    }
+
+    new Header({
+        $target,
+        initialState: this.state.username
+    })
     new TodoForm({
         $target,
         onSubmit: (content) => {
@@ -14,7 +23,7 @@ export default function App({
 
     const todoList = new TodoList({
         $target,
-        initailState: [],
+        initialState: this.state.todos,
         onToggle: (id) => {
             alert(`${id} 토글 예정`)
         },
