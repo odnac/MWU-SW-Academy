@@ -34,7 +34,7 @@ export default function App({
                     todo
                 ]
             })
-            await request(`/${this.state.username}?delay=3000`, {
+            await request(`/${this.state.username}`, {
                 method: 'POST',
                 body: JSON.stringify(todo)
             })
@@ -63,12 +63,28 @@ export default function App({
             todos: this.state.todos,
         },
         onToggle: async (id) => {
+            const todoIndex = this.state.todos.findIndex(todo => todo._id === id)
+
+            const nextTodos = [...this.state.todos]
+            nextTodos[todoIndex].isCompleted = !nextTodos[todoIndex].isCompleted
+            this.setState({
+                ...this.state,
+                todos: nextTodos
+            })
             await request(`/${this.state.username}/${id}/toggle`, {
                 method: 'PUT'
             })
             await fetchTodos()
         },
         onRemove: async (id) => {
+            const todoIndex = this.state.todos.findIndex(todo => todo._id === id)
+
+            const nextTodos = [...this.state.todos]
+            nextTodos.splice(todoIndex, 1)
+            this.setState({
+                ...this.state,
+                todos: nextTodos
+            })
             await request(`/${this.state.username}/${id}`, {
                 method: 'DELETE'
             })
@@ -84,7 +100,7 @@ export default function App({
                 ...this.state,
                 isTodoLoading: true
             })
-            const todos = await request(`/${username}?delay=5000 `)
+            const todos = await request(`/${username}`)
             this.setState({
                 ...this.state,
                 todos,
