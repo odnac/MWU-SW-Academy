@@ -13,9 +13,13 @@ export default function Header({
     }
 
     this.render = () =>{
-        const { username, isLoading } = this.state
-
-        $h2.innerHTML = `${username} 님의 할일 목록 ${isLoading ? '로딩 중.. ': ''}`
+        const { selectedUsername, isLoading } = this.state
+       
+        if(!selectedUsername) {
+            $h2.innerHTML = ''
+            return
+        }
+        $h2.innerHTML = `${selectedUsername} 님의 할일 목록 ${isLoading ? '로딩 중.. ': ''}`
     }
 
     this.render()
