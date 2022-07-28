@@ -19,12 +19,20 @@ export default function App({
     new TodoForm({
         $target,
         onSubmit: async (content) => {
+            const todo = {
+                content,
+                isCompleted: false
+            }
+            this.setState({
+                ...this.state,
+                todos: [
+                    ...this.state.todos,
+                    todo
+                ]
+            })
             await request(`/${this.state.username}`, {
                 method: 'POST',
-                body: JSON.stringify({
-                    content,
-                    isCompleted: false
-                })
+                body: JSON.stringify(todo)
             })
             await fetchTodos()
         }
@@ -51,7 +59,7 @@ export default function App({
         const { username } = this.state
 
         if(username) {
-            const todos = await request(`/${username}`)
+            const todos = await request(`/${username}?delay=5000`)
             this.setState({
                 ...this.state,
                 todos
