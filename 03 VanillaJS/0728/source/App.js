@@ -18,10 +18,23 @@ export default function App({
 
     new TodoForm({
         $target,
-        onSubmit: (content) => {
-            alert(`${content} 추가처리!`)
+        onSubmit: async (content) => {
+            await request(`/${this.state.username}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    content,
+                    isCompleted: false
+                })
+            })
+            await fetchTodos()
         }
     })
+
+    this.setState = nextState => {
+        this.state = nextState
+
+        todoList.setState(this.state.todos)
+    }
 
     const todoList = new TodoList({
         $target,
@@ -34,14 +47,17 @@ export default function App({
         }
     })
 
-    const init = async () => {
+    const fetchTodos = async () => {
         const { username } = this.state
 
         if(username) {
             const todos = await request(`/${username}`)
-            console.log(todos)
+            this.setState({
+                ...this.state,
+                todos
+            })
         }
     }
     
-    init()
+    fetchTodos()
 }
