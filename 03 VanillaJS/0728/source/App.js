@@ -12,9 +12,12 @@ export default function App({
         isTodoLoading: false
     }
 
-    new Header({
+    const header = new Header({
         $target,
-        initialState: this.state.username
+        initialState: {
+            isLoading: this.state.isTodoLoading,
+            username: this.state.username
+        }
     })
 
     new TodoForm({
@@ -24,7 +27,14 @@ export default function App({
                 content,
                 isCompleted: false
             }
-            await request(`/${this.state.username}`, {
+            this.setState({
+                ...this.state,
+                todos: [
+                    ...this.state.todos,
+                    todo
+                ]
+            })
+            await request(`/${this.state.username}?delay=3000`, {
                 method: 'POST',
                 body: JSON.stringify(todo)
             })
@@ -35,8 +45,13 @@ export default function App({
     this.setState = nextState => {
         this.state = nextState
 
+        header.setState({
+            isLoading: this.state.isTodoLoading,
+            username: this.state.username
+        })
+
         todoList.setState({
-            isTodoLoading: this.state.isTodoLoading,
+            isLoading: this.state.isTodoLoading,
             todos: this.state.todos
         })
     }
@@ -69,7 +84,7 @@ export default function App({
                 ...this.state,
                 isTodoLoading: true
             })
-            const todos = await request(`/${username}`)
+            const todos = await request(`/${username}?delay=5000 `)
             this.setState({
                 ...this.state,
                 todos,
