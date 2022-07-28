@@ -24,13 +24,6 @@ export default function App({
                 content,
                 isCompleted: false
             }
-            this.setState({
-                ...this.state,
-                todos: [
-                    ...this.state.todos,
-                    todo
-                ]
-            })
             await request(`/${this.state.username}`, {
                 method: 'POST',
                 body: JSON.stringify(todo)
@@ -54,8 +47,11 @@ export default function App({
             isTodoLoading: this.state.isTodoLoading,
             todos: this.state.todos,
         },
-        onToggle: (id) => {
-            alert(`${id} 토글 예정`)
+        onToggle: async (id) => {
+            await request(`/${this.state.username}/${id}/toggle`, {
+                method: 'PUT'
+            })
+            await fetchTodos()
         },
         onRemove: (id) => {
             alert(`${id} 삭제 예정`)
@@ -70,7 +66,7 @@ export default function App({
                 ...this.state,
                 isTodoLoading: true
             })
-            const todos = await request(`/${username}?delay=5000`)
+            const todos = await request(`/${username}`)
             this.setState({
                 ...this.state,
                 todos,
