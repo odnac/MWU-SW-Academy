@@ -13,13 +13,17 @@ const post = getItem(TEMP_POST_SAVE_KEY, {
     content: ''
 })
 
+let timer = null
+
 new Editor({ 
     $target, 
     initialState: post, 
     onEditing: (post) => {
-        setItem('TEMP_POST_SAVE_KEY', {
-            ...post,
-            tempSaveDate: new Date()
-        })
+        timer = setTimeout(() => {
+            setItem('TEMP_POST_SAVE_KEY', {
+                ...post,
+                tempSaveDate: new Date()
+            })
+        }, 500)
     } 
 })
