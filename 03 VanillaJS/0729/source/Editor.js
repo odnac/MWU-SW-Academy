@@ -4,7 +4,7 @@ export default function Editor({ $target, initialState = {
 }, onEditing}) {
     const $editor = document.createElement('div')
 
-    let isinitailize = false
+    let isinitialize = false
 
     this.state = initialState
 
@@ -18,12 +18,12 @@ export default function Editor({ $target, initialState = {
     }
 
     this.render = () => {
-        if(!isinitailize) {
+        if(!isinitialize) {
             $editor.innerHTML = `
                 <input type="text" name="title" style="width:600px;" value="${this.state.title}"/>
                 <textarea name="content" style="width:600px;height:400px;">${this.state.content}</textarea>
             `
-            isinitailize = true
+            isinitialize = true
         }
     }
     

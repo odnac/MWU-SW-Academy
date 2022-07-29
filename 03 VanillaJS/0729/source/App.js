@@ -1,5 +1,6 @@
 import PostsPage from "./PostsPage.js";
 import PostEditPage from "./PostEditPage.js"
+import { initRouter } from "./router.js";
 
 // url 규칙
 // 루트: postsPage그리기
@@ -15,7 +16,7 @@ export default function App({ $target }) {
 
     const postEditPage = new PostEditPage({ 
         $target, 
-        initailState: {
+        initialState: {
             postId: 'new',
             post: {
                 title: '',
@@ -38,8 +39,5 @@ export default function App({ $target }) {
 
     this.route()
 
-    window.addEventListener('route-change', (nextUrl) => {
-        history.pushState(null, null, nextUrl)
-        this.route()
-    })
+    initRouter(() => this.route())
 }

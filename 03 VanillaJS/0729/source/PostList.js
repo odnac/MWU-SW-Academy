@@ -1,3 +1,5 @@
+import { push } from "./router.js"
+
 export default function PostList({ $target, initialState,  }) {
     const $postList = document.createElement('div')
     $target.appendChild($postList)
@@ -26,12 +28,7 @@ export default function PostList({ $target, initialState,  }) {
 
         if($li) {
             const { id } = $li.dataset
-
-            window.dispatchEvent(new Event('route-change', {
-                detail: {
-                    id
-                }
-            }))
+            push(`/posts/${id}`)
         }
     })
 }

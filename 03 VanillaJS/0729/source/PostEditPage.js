@@ -1,11 +1,12 @@
 import { request } from "./api.js"
 import Editor from "./Editor.js"
+import LinkButton from "./LinkButton.js"
 import { getItem, removeItem, setItem } from "./storage.js"
 
-export default function PostEditPage({ $target, initailState }) {
+export default function PostEditPage({ $target, initialState }) {
     const $page = document.createElement('div')
 
-    this.state = initailState
+    this.state = initialState
 
     let postLocalSaveKey = `temp-post-${this.state.postId}`
 
@@ -51,8 +52,18 @@ export default function PostEditPage({ $target, initailState }) {
     this.setState = async nextState => {
         if(this.state.postId !== nextState.postId ) {
             postLocalSaveKey = `temp-post-${nextState.postId}`
+           
             this.state = nextState
-            await fetchPost()
+           
+            if(this.postId === 'new'){
+                const post = getItem(postLocalSaveKey, {  
+                    title: '',
+                    content: ''
+                })
+                editor.setState(post)
+            } else {
+                await fetchPost()
+            }
             return
         }
         
@@ -94,4 +105,12 @@ export default function PostEditPage({ $target, initailState }) {
             })
         }
     }
+
+    new LinkButton({
+        $target: $page,
+        initialState: {
+            text: '목록으로 이동',
+            link: '/'
+        }
+    })
 }
