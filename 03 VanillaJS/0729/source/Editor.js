@@ -1,8 +1,10 @@
 export default function Editor({ $target, initialState = {
     title: '',
     content: ''
-} }) {
+}, onEditing}) {
     const $editor = document.createElement('div')
+
+    let isinitailize = false
 
     this.state = initialState
 
@@ -14,18 +16,29 @@ export default function Editor({ $target, initialState = {
     }
 
     this.render = () => {
-        $editor.innerHTML = `
-            <input type="text" name="title" style="width:600px;" value="${this.state.title}"/>
-            <textarea name="content" style="width:600px;height:400px;">${this.state.content}</textarea>
-        `
+        if(!isinitailize) {
+            $editor.innerHTML = `
+                <input type="text" name="title" style="width:600px;" value="${this.state.title}"/>
+                <textarea name="content" style="width:600px;height:400px;">${this.state.content}</textarea>
+            `
+            isinitailize = true
+        }
     }
     
     this.render()
 
     $editor.addEventListener('keyup', e => {
-        
-        this.state = {
-            ...this.state
+        const { target } = e
+        const name = target.getAttribute('name')
+
+        if(this.state[name]) {
+            const nextState = {
+                ...this.state,
+                [name]: target.value
+            }
+
+            this.setState(nextState)
+            onEditing(this.state)
         }
     })
 }

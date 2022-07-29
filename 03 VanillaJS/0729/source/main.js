@@ -1,12 +1,25 @@
 import App from "./App.js"
 import Editor from "./Editor.js"
+import { getItem, setItem } from "./storage.js"
 
 
 const $target = document.querySelector('#app')
 
 // new App({ $target })
 
-new Editor({ $target, initialState:{
-    title: '오늘의 학습일지',
-    content: 'TypeScript'
-} })
+const TEMP_POST_SAVE_KEY = 'temp-post'
+const post = getItem(TEMP_POST_SAVE_KEY, {
+    title: '',
+    content: ''
+})
+
+new Editor({ 
+    $target, 
+    initialState: post, 
+    onEditing: (post) => {
+        setItem('TEMP_POST_SAVE_KEY', {
+            ...post,
+            tempSaveDate: new Date()
+        })
+    } 
+})
