@@ -38,6 +38,11 @@ export default function PostEditPage({ $target, initialState }) {
                     })
                     history.replaceState(null, null, `/posts/${createdPost.id}`)
                     removeItem(postLocalSaveKey)
+
+                    this.setState({
+                        postId: createdPost.id,
+                        
+                    })
                 } else {
                     await request(`/posts/${post.id}`, {
                         method: 'PUT',
@@ -55,11 +60,12 @@ export default function PostEditPage({ $target, initialState }) {
            
             this.state = nextState
            
-            if(this.postId === 'new'){
+            if(this.state.postId === 'new'){
                 const post = getItem(postLocalSaveKey, {  
                     title: '',
                     content: ''
                 })
+                this.render()
                 editor.setState(post)
             } else {
                 await fetchPost()
