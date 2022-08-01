@@ -53,6 +53,6 @@ export default function Editor({ $target, initialState = {
             ...this.state,
             content: e.target.innerHTML
         }
-        rhis.setState(nextState)
+        this.setState(nextState)
     })
 }
