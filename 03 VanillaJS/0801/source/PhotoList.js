@@ -1,8 +1,22 @@
 export default function PhotoList({ $target, initialState, onScrollEnded}) {
     let isInitialize = false
+    
     const $photoList = document.createElement('div')
     $target.appendChild($photoList)
     this.state = initialState
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting && !this.state.isLoading) {
+                console.log('화면 끝!!', entry)
+                onScrollEnded()
+            }
+        })
+    }, {
+        threshold: 0
+    })
+
+    let $lastLi = null
 
     this.setState = nextState => {
         this.state = nextState
@@ -13,7 +27,6 @@ export default function PhotoList({ $target, initialState, onScrollEnded}) {
         if(isInitialize) {
             $photoList.innerHTML = `
             <ul class="PhotoList_photos"></ul>
-            <button class="PhotoList_loadMore"style="width: 100%; height: 200px; font-size: 20px;">Load More</button>
         `
         isInitialize = true
         }
@@ -26,18 +39,32 @@ export default function PhotoList({ $target, initialState, onScrollEnded}) {
                 // 없으면 li 생성하고 $photos에 appendChild
                 const $li = document.createElement('li')
                 $li.setAttribute('data-id', photo.id)
-                $li.style = 'list-style: none; '
+                $li.style = 'list-style: none; min-height: 800px;'
                 $li.innerHTML = `<img width="100%" src="${photo.imagePath}" />`
 
                 $photos.appendChild($li)
             }
         })
+
+        const $nextLi = $photos.querySelector('li:last-child')
+
+        if($nextLi !== null) {
+            if($lastLi !== null) {
+                observer.unobserve($lastLi)
+            }
+
+            $lastLi = $nextLi
+            observer.observe($lastLi)
+        }
     }
 
     this.render()
 
-    $photoList.addEventListener('click', e => {
-        if(e.target.className === 'PhotoList_loadMore' && !this.state.isLoading){
+    window.addEventListener('scroll', () => {
+        const { isLoading, totalCount, photos } = this.state
+        const isScrollEnded = (window.innerHeight + window.scrollY) +100 >= document.body.offsetHeight
+
+        if(isScrollEnded && !this.state.isLoading && photos.length < totalCount) {
             onScrollEnded()
         }
     })
