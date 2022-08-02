@@ -1,4 +1,5 @@
 import { request } from "./api.js"
+import Breadcrumb from "./Breadcrumb.js"
 import ImageViewer from "./ImageViewer.js"
 import Loading from "./Loading.js"
 import Nodes from "./Nodes.js"
@@ -13,6 +14,31 @@ export default function App({ $target }) {
 
     const loading = new Loading({
       $target
+    })
+
+    const breadcrumb = new Breadcrumb({
+      $target,
+      initialState: this.state.paths,
+      onClick: async (id) => {
+        // 클릭한 경로 외에 paths를 날려준다.
+        if (id) {
+          const nextPaths = [...this.state.paths]
+          const pathIndex = nextPaths.findIndex(path => path.id === id)
+
+          this.setState({
+            ...this.state,
+            paths: nextPaths.slice(0, pathIndex + 1)
+          })
+        } else {
+          this.setState({
+            ...this.state,
+            paths: []
+          })
+        }
+        const index = nextPaths.findIndex(path => path.id === id)
+
+        await fetchNodes(id)
+      }
     })
     
     const nodes = new Nodes({
@@ -80,6 +106,8 @@ export default function App({ $target }) {
       })
 
       loading.setState(this.state.isLoading)
+
+      breadcrumb.setState(this.state.paths)
     }
 
     const fetchNodes = async (id) => {
