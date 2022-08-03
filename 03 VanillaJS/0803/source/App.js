@@ -1,5 +1,13 @@
 import Header from "./Header.js";
+import Keyword from "./Keyword.js";
 
 export default function App({ $target }){
-    const header = new Header({ $target })
+    const header = new Header({ 
+        $target, 
+        onKeywordInput: (keyword) => {
+            if(keyword.trim().length > 1) {
+                console.log(keyword)
+            }
+        }
+    })
 }
