@@ -40,7 +40,6 @@ export default function SuggestKeywords({ $target, initialState, onKeywordSelect
     window.addEventListener('keydown', (e) => {
         if($suggest.style.display !== 'none') {
             const {key} = e
-           
             // arrow down을 입력했을 때
            if(key === 'ArrowUp') {
             const nextCursor = this.state.cursor -1
