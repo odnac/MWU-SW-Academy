@@ -1,4 +1,4 @@
-export const END_POINT = 'https://mwu.roto-cat-search-api.programmers.co.kr/api/cats'
+const END_POINT = 'https://mwu.roto-cat-search-api.programmers.co.kr/api/cats'
 
 export const request = async(url) => {
     try {
