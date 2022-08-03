@@ -47,17 +47,28 @@ export default function SuggestKeywords({ $target, initialState, onKeywordSelect
                     ...this.state,
                     cursor: nextCursor < 0 ? this.state.keywords.length - 1 : nextCursor
                 })
+<<<<<<< HEAD
             // arrow up을 입력했을 때
+=======
+>>>>>>> 780520777462e86cf0e0073a5d4129169449a231
             } else if (key === 'ArrowUp') {
                 const nextCursor = this.state.cursor -1
                 this.setState({
                     ...this.state,
                     cursor: nextCursor > this.state.keywords.length - 1 ? 0 : nextCursor
                 })
+<<<<<<< HEAD
             // enter를 입력했을 때
             } else if (key === 'Enter') {
                 onKeywordSelect(this.state.keywords[this.state.cursor])
             }
+=======
+            } else if (key === 'Enter') {
+                onKeywordSelect(this.state.keywords[this.state.cursor])
+            }
+            // arrow up을 입력했을 때
+            // enter를 입력했을 때
+>>>>>>> 780520777462e86cf0e0073a5d4129169449a231
         }
     })
 }
