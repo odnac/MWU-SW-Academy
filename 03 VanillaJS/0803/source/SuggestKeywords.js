@@ -1,4 +1,4 @@
-export default function SuggestKeywords({ $target, initialState }) {
+export default function SuggestKeywords({ $target, initialState, onKeywordSelect }) {
     const $suggest = document.createElement('div')
     $suggest.className = 'Keywords'
     $target.appendChild($suggest)
@@ -24,4 +24,12 @@ export default function SuggestKeywords({ $target, initialState }) {
     }
 
     this.render()
+
+    $suggest.addEventListener('click', e => {
+        const $li = e.target.closest('li')
+
+        if($li) {
+            onKeywordSelect($li.textContent)
+        }
+    })
 }
