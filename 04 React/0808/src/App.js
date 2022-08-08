@@ -6,6 +6,7 @@ import AutoCounter from "./components/AutoCounter";
 import Board2 from "./components/Board2";
 import Pagination from "./components/Pagination";
 import Box from "./components/Box";
+import ShowSum from "./components/ShowSum";
 
 function App() {
     /*
@@ -154,9 +155,27 @@ function App() {
      * 2. Inline style을 적용하는 것
      * 3. CSS in JS - emotion
     */
+    // return (
+    //   <div>
+    //     <Box bgColor="red"/>
+    //   </div>
+    // )
+
+
+
+    /*
+     * useMemo
+     * 1. 함수 컴포넌트는 자신의 상태가 변경될 때 리렌더링된다.
+     * 2. 부모 컴포넌트로 부터 받는 prop이 변경될 때 리렌더링된다.
+     * 3. 부모 컴포넌트의 상태가 변경되면 리렌더링된다.
+     * 만약 연산의 속도가 느린 컴포넌트라면?
+     */
+    const [label, setLabel] = useState('Result')
+    
     return (
       <div>
-        <Box bgColor="red"/>
+        <button onClick={() => setLabel(label + ":")}>Change Label</button>
+        <ShowSum label={label} n={10000000} />
       </div>
     )
 }
