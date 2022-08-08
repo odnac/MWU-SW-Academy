@@ -1,34 +1,49 @@
-import './App.css';
-import Logo from "./components/Logo"
-import Paragraph from './components/Paragraph';
+import { useState } from "react"
+import Board from "./components/Board"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Logo size={100}/>
-        <Logo />
-        <Logo />
+    const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(false);
+    const [visible3, setVisible3] = useState(false);
 
-        <Paragraph>
-          Edit <code>src/App.js</code> and save to reload.
-        </Paragraph>
+    const Data = [
+      {
+        id: 1,
+        title: 'hawee',
+        author: 'kim'
+      }, {
+        id: 2,
+        title: 'hawee2',
+        author: 'kim2'
+      }, {
+        id: 3,
+        title: 'hawee3',
+        author: 'kim3'
+      }, {
+        id: 4,
+        title: 'hawee4',
+        author: 'kim4'
+      },
+    ]
 
-        <Paragraph size={14} color="blue">
-          I'm tired
-        </Paragraph>
+    return (
+      <div>
+        <button onClick={() => setVisible(!visible)}>Toggle1</button>
+        {visible && (
+          <h1>논리곱 연산자를 통해 쉽게 JSX 렌더링 여부를 결정할 수 있습니다.</h1>
+        )}
+        <button onClick={() => setVisible2(!visible2)}>Toggle2</button>
+        {visible2 ? (
+          <h1>삼항 연산자를 통해 쉽게 JSX 렌더링 여부를 결정할 수 있습니다.</h1>
+        ) : null}
+        <button onClick={() => setVisible3(!visible3)}>게시판</button>
+        {visible3 ? (
+          <h1>게시판</h1>
+        ) : null}
 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        { visible ? <Board articles={Data}/> : <p>게시판을 보려면 게시판 버튼을 클릭해주세요</p> }
+      </div>
+    )
 }
 
 export default App;
