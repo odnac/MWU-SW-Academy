@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react"
 import Board from "./components/Board"
 import Input from "./components/input";
 import AutoCounter from "./components/AutoCounter";
+import Board2 from "./components/Board2";
+import Pagination from "./components/Pagination";
 
 function App() {
     /*
@@ -113,14 +115,33 @@ function App() {
      * useState는 값이 변경될 때 다시 렌더링을 한다.
      * useRef는 값이 변경되더라도 다시 렌더링을 하지 않는다.
     */
-    const inputRef = useRef();
+    // const inputRef = useRef();
+
+    // return (
+    //   <div>
+    //     <Input ref={inputRef}/>
+    //     <button onClick={() => inputRef.current.focus()}>Focus</button>
+
+    //     <AutoCounter />
+    //   </div>
+    // )
+
+    /*
+     * 페이지네이션
+    */
+    const [page, setPage] = useState(0)
+    const articles = new Array(100).fill().map((_, i) => ({
+      id: i,
+      title: `${i}번 게시물`
+    }))
+
+    const limit = 10;
+    const offset =  page * limit;
 
     return (
       <div>
-        <Input ref={inputRef}/>
-        <button onClick={() => inputRef.current.focus()}>Focus</button>
-
-        <AutoCounter />
+        <Pagination defaultPage={0} limit={limit} total={articles.length} onChange={setPage} />
+        <Board2 articles={articles.slice(offset, offset + limit)}/>
       </div>
     )
 }
