@@ -1,9 +1,11 @@
 import Counter from "./components/Counter";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Board from "./components/Board"
 
 function App() {
-    // 분기와 반복
+    /*
+     * 분기와 반복
+    */
     // const [visible, setVisible] = useState(false);
     // const [visible2, setVisible2] = useState(false);
     // const [visible3, setVisible3] = useState(false);
@@ -47,25 +49,56 @@ function App() {
     //   </div>
     // )
     
-    // 상태와 이벤트 바인딩
-    const [totalCount, setTotalCount] = useState(0);
+    /*
+     * 상태와 이벤트 바인딩
+    */
+    // const [totalCount, setTotalCount] = useState(0);
 
-    return (
-      <div>
-        TotalCount: {totalCount}
-        <Counter 
-          onIncrease={(count) => setTotalCount(totalCount + 1)}
-          onDecrease={(count) => setTotalCount(totalCount - 1)}
-        />
-        <Counter 
-          onIncrease={(count) => setTotalCount(totalCount + 1)}
-          onDecrease={(count) => setTotalCount(totalCount - 1)}
-        />
-        <Counter 
-          onIncrease={(count) => setTotalCount(totalCount + 1)}
-          onDecrease={(count) => setTotalCount(totalCount - 1)}
-        />
-      </div>
+    // return (
+    //   <div>
+    //     TotalCount: {totalCount}
+    //     <Counter 
+    //       onIncrease={(count) => setTotalCount(totalCount + 1)}
+    //       onDecrease={(count) => setTotalCount(totalCount - 1)}
+    //     />
+    //     <Counter 
+    //       onIncrease={(count) => setTotalCount(totalCount + 1)}
+    //       onDecrease={(count) => setTotalCount(totalCount - 1)}
+    //     />
+    //     <Counter 
+    //       onIncrease={(count) => setTotalCount(totalCount + 1)}
+    //       onDecrease={(count) => setTotalCount(totalCount - 1)}
+    //     />
+    //   </div>
+    // )
+
+    /*
+     * useEffect
+     * 무언가 변화가 있을 때 감지하여 반응하는 Hook
+    */
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      console.log(`Clicked ${count} times.`)
+    }, [count]); // count의 변화를 감지한다.
+
+    useEffect(() => {
+      console.log('Component Loaded')
+      const handleScroll = () => {
+        console.log(window.scrollY)
+      }
+
+      document.addEventListener('scroll', handleScroll) // 전역적인 이벤트를 사용할 때 쓸 수 있다.
+      return () => document.removeEventListener('scroll', handleScroll) // return으로 반환한 함수는 컴포넌트가 제거될 때 실행된다.
+    }, []) // 컴포넌트가 처음 로드될 때 실행된다.
+
+    return ( 
+    <div>
+      <div>You clicked {count} times.</div>
+      <button onClick={() => setCount(count + 1)}>+</button>
+
+      <div style={{height: 100000}}></div>
+    </div>
     )
 }
 
