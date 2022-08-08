@@ -5,6 +5,7 @@ import Input from "./components/input";
 import AutoCounter from "./components/AutoCounter";
 import Board2 from "./components/Board2";
 import Pagination from "./components/Pagination";
+import Box from "./components/Box";
 
 function App() {
     /*
@@ -129,19 +130,33 @@ function App() {
     /*
      * 페이지네이션
     */
-    const [page, setPage] = useState(0)
-    const articles = new Array(100).fill().map((_, i) => ({
-      id: i,
-      title: `${i}번 게시물`
-    }))
+    // const [page, setPage] = useState(0)
+    // const articles = new Array(100).fill().map((_, i) => ({
+    //   id: i,
+    //   title: `${i}번 게시물`
+    // }))
 
-    const limit = 10;
-    const offset =  page * limit;
+    // const limit = 10;
+    // const offset =  page * limit;
 
+    // return (
+    //   <div>
+    //     <Pagination defaultPage={0} limit={limit} total={articles.length} onChange={setPage} />
+    //     <Board2 articles={articles.slice(offset, offset + limit)}/>
+    //   </div>
+    // )
+    
+    
+    /*
+     * 컴포넌트 스타일링
+     * 스타일을 적용하는 법
+     * 1. 스타일시트를 이용하는 것
+     * 2. Inline style을 적용하는 것
+     * 3. CSS in JS - emotion
+    */
     return (
       <div>
-        <Pagination defaultPage={0} limit={limit} total={articles.length} onChange={setPage} />
-        <Board2 articles={articles.slice(offset, offset + limit)}/>
+        <Box bgColor="red"/>
       </div>
     )
 }
