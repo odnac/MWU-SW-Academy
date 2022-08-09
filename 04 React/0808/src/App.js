@@ -1,5 +1,5 @@
 import Counter from "./components/Counter";
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Board from "./components/Board"
 import Input from "./components/input";
 import AutoCounter from "./components/AutoCounter";
@@ -8,6 +8,7 @@ import Pagination from "./components/Pagination";
 import Box from "./components/Box";
 import Box2 from "./components/Box2"
 import ShowSum from "./components/ShowSum";
+import Checkbox from "./components/Checkbox";
 
 function App() {
     /*
@@ -183,14 +184,33 @@ function App() {
     /*
      * React.memo
      */
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
 
+    // return ( 
+    //   <div>
+    //     {count}
+    //     <button onClick={() => setCount(count + 1)}>+</button>
+    //     <Box2 />
+    //   </div> 
+    // )
+
+    /*
+     * useCallback
+    */
+    const [foodOn, setFoodOn] = useState(false)
+    const [clothesOn, setClothesOn] = useState(false)
+    const [shelterOn, setShelterOn] = useState(false)
+
+    const foodChange = useCallback((e) => setFoodOn(e.target.checked), [])
+    const clothesChange =useCallback((e) => setClothesOn(e.target.checked), [])
+    const shelterChange =useCallback((e) => setShelterOn(e.target.checked), [])
+ 
     return ( 
       <div>
-        {count}
-        <button onClick={() => setCount(count + 1)}>+</button>
-        <Box2 />
-      </div> 
+        <Checkbox label="Food" on={foodOn} onChange={foodChange}/>
+        <Checkbox label="Clothes" on={clothesOn}  onChange={clothesChange}/>
+        <Checkbox label="Shelter" on={shelterOn}  onChange={shelterChange}/>
+      </div>
     )
 }
 
