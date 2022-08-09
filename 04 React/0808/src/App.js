@@ -9,11 +9,17 @@ import Box from "./components/Box";
 import Box2 from "./components/Box2"
 import ShowSum from "./components/ShowSum";
 import Checkbox from "./components/Checkbox";
+import useToggle from "./components/hooks/useToggle";
+import Checkbox2 from "./components/Checkbox2";
+import Box3 from "./components/Box3";
+import useHover from "./components/hooks/useHover";
+import useKeyPress from "./components/hooks/useKeyPress";
 
 function App() {
     /*
      * 분기와 반복
     */
+
     // const [visible, setVisible] = useState(false);
     // const [visible2, setVisible2] = useState(false);
     // const [visible3, setVisible3] = useState(false);
@@ -61,6 +67,7 @@ function App() {
     /*
      * 상태와 이벤트 바인딩
     */
+
     // const [totalCount, setTotalCount] = useState(0);
 
     // return (
@@ -86,6 +93,7 @@ function App() {
      * useEffect
      * 무언가 변화가 있을 때 감지하여 반응하는 Hook
     */
+
     // const [count, setCount] = useState(0);
 
     // useEffect(() => {
@@ -119,6 +127,7 @@ function App() {
      * useState는 값이 변경될 때 다시 렌더링을 한다.
      * useRef는 값이 변경되더라도 다시 렌더링을 하지 않는다.
     */
+
     // const inputRef = useRef();
 
     // return (
@@ -134,6 +143,7 @@ function App() {
     /*
      * 페이지네이션
     */
+
     // const [page, setPage] = useState(0)
     // const articles = new Array(100).fill().map((_, i) => ({
     //   id: i,
@@ -172,6 +182,7 @@ function App() {
      * 3. 부모 컴포넌트의 상태가 변경되면 리렌더링된다.
      * 만약 연산의 속도가 느린 컴포넌트라면?
      */
+
     // const [label, setLabel] = useState('Result')
     
     // return (
@@ -181,9 +192,11 @@ function App() {
     //   </div>
     // )
 
+
     /*
      * React.memo
      */
+
     // const [count, setCount] = useState(0)
 
     // return ( 
@@ -194,22 +207,44 @@ function App() {
     //   </div> 
     // )
 
+
     /*
      * useCallback
     */
-    const [foodOn, setFoodOn] = useState(false)
-    const [clothesOn, setClothesOn] = useState(false)
-    const [shelterOn, setShelterOn] = useState(false)
 
-    const foodChange = useCallback((e) => setFoodOn(e.target.checked), [])
-    const clothesChange =useCallback((e) => setClothesOn(e.target.checked), [])
-    const shelterChange =useCallback((e) => setShelterOn(e.target.checked), [])
+    // const [foodOn, setFoodOn] = useState(false)
+    // const [clothesOn, setClothesOn] = useState(false)
+    // const [shelterOn, setShelterOn] = useState(false)
+
+    // const foodChange = useCallback((e) => setFoodOn(e.target.checked), [])
+    // const clothesChange =useCallback((e) => setClothesOn(e.target.checked), [])
+    // const shelterChange =useCallback((e) => setShelterOn(e.target.checked), [])
  
-    return ( 
+    // return ( 
+    //   <div>
+    //     <Checkbox label="Food" on={foodOn} onChange={foodChange}/>
+    //     <Checkbox label="Clothes" on={clothesOn}  onChange={clothesChange}/>
+    //     <Checkbox label="Shelter" on={shelterOn}  onChange={shelterChange}/>
+    //   </div>
+    // )
+
+
+    /*
+    * Custom Hook
+    */
+
+    const [on, toggle] = useToggle()
+    const [ref, isHover] = useHover()
+    const keyPressed = useKeyPress("a")
+
+    return (
       <div>
-        <Checkbox label="Food" on={foodOn} onChange={foodChange}/>
-        <Checkbox label="Clothes" on={clothesOn}  onChange={clothesChange}/>
-        <Checkbox label="Shelter" on={shelterOn}  onChange={shelterChange}/>
+        <Checkbox2 checked={on} onChange={toggle} />
+        
+        {isHover ? 'hover' : 'mouseout'}
+        <Box3 ref={ref}/>
+
+        {keyPressed && "Pressed"}
       </div>
     )
 }
