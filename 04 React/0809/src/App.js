@@ -67,6 +67,11 @@ function App() {
     /*
      * 로그인, 회원가입 Form 
     */
+
+
+    /*
+     * 컴포넌트 연습하기 - Text
+    */
 }
 
 export default App;
