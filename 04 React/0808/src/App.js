@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import Board from "./components/Board"
 import Input from "./components/input";
 import AutoCounter from "./components/AutoCounter";
-import Board2 from "./components/Board2";
 import Pagination from "./components/Pagination";
 import Box from "./components/Box";
 import ShowSum from "./components/ShowSum";
@@ -177,14 +176,14 @@ function App() {
      * 만약 연산의 속도가 느린 컴포넌트라면?
      */
 
-    // const [label, setLabel] = useState('Result')
+    const [label, setLabel] = useState('Result')
     
-    // return (
-    //   <div>
-    //     <button onClick={() => setLabel(label + ":")}>Change Label</button>
-    //     <ShowSum label={label} n={10000000} />
-    //   </div>
-    // )
+    return (
+      <div>
+        <button onClick={() => setLabel(label + ":")}>Change Label</button>
+        <ShowSum label={label} n={10000000} />
+      </div>
+    )
 }
 
 export default App;
