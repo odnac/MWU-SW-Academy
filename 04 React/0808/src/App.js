@@ -6,6 +6,7 @@ import AutoCounter from "./components/AutoCounter";
 import Board2 from "./components/Board2";
 import Pagination from "./components/Pagination";
 import Box from "./components/Box";
+import Box2 from "./components/Box2"
 import ShowSum from "./components/ShowSum";
 
 function App() {
@@ -170,13 +171,26 @@ function App() {
      * 3. 부모 컴포넌트의 상태가 변경되면 리렌더링된다.
      * 만약 연산의 속도가 느린 컴포넌트라면?
      */
-    const [label, setLabel] = useState('Result')
+    // const [label, setLabel] = useState('Result')
     
-    return (
+    // return (
+    //   <div>
+    //     <button onClick={() => setLabel(label + ":")}>Change Label</button>
+    //     <ShowSum label={label} n={10000000} />
+    //   </div>
+    // )
+
+    /*
+     * React.memo
+     */
+    const [count, setCount] = useState(0)
+
+    return ( 
       <div>
-        <button onClick={() => setLabel(label + ":")}>Change Label</button>
-        <ShowSum label={label} n={10000000} />
-      </div>
+        {count}
+        <button onClick={() => setCount(count + 1)}>+</button>
+        <Box2 />
+      </div> 
     )
 }
 
