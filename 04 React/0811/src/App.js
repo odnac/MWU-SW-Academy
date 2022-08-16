@@ -28,15 +28,17 @@ function App() {
   //   </div>
   // );
 
-  return (
-    <TaskProvider>
-      <Container>
-        <Header>ToDo</Header>
-        <NewTaskForm />
-        <TaskList css={{marginTop: 16}}/>
-      </Container>
-    </TaskProvider>
-  )
+  /* ToDo를 통한 Context API 실습
+  */
+  // return (
+  //   <TaskProvider>
+  //     <Container>
+  //       <Header>ToDo</Header>
+  //       <NewTaskForm />
+  //       <TaskList css={{marginTop: 16}}/>
+  //     </Container>
+  //   </TaskProvider>
+  // )
 }
 
 export default App;
