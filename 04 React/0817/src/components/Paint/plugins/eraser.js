@@ -1,11 +1,11 @@
 import { Plugin } from "./plugin";
 
-export class PenPlugin extends Plugin{
+export class EraserPlugin extends Plugin{
     oldX = -1
     oldY = -1
 
     constructor(initialValues) {
-        super({ ...initialValues, name: 'pen' })
+        super({ ...initialValues, name: 'eraser' })
     }
 
     draw(data) {
@@ -17,12 +17,13 @@ export class PenPlugin extends Plugin{
         if(this.oldX === -1) this.oldX = x
         if(this.oldY === -1) this.oldY = y
 
+        context.globalCompositeOperation = 'destination-out'
+
         if(state === 'draw-started' || state === 'drawing') {
             context.beginPath()
             context.moveTo(this.oldX, this.oldY)
             context.lineTo(x, y)
             context.stroke()
-            context.closePath()
 
             this.oldX = x
             this.oldY = y

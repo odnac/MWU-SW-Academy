@@ -15,7 +15,7 @@ const Paint = ({ command = 'pen', color = '#000000', lineWidth = 2, width = 800,
     const [currentLineWidth, setCurrentLineWidth] = useState(lineWidth)
     const [currentColor, setCurrentColor] = useState(color)
     const [currentPlugins, setCurrentPlugins] = useState({})
-    const [drawing, setDrawing] = useState(0)
+    const [drawing, setDrawing] = useState(false)
     const canvasRef = useRef()
 
     const scale = typeof window === 'undefined' ? 1 : window.devicePixelRatio
@@ -31,13 +31,18 @@ const Paint = ({ command = 'pen', color = '#000000', lineWidth = 2, width = 800,
     }
 
     useEffect(() => {
-        if(!canvasRef.current) return
+        setCurrentLineWidth(lineWidth)
+    }, [lineWidth])
 
-        canvasRef.current.width = width * scale
-        canvasRef.current.height = height * scale
+    useEffect(() => {
+        setcurrentCommand(command)
+    }, [command])
 
-        canvasRef.current.getContext('2d').scale(scale, scale)
+    useEffect(() => {
+        setCurrentColor(color)
+    }, [color])
 
+    useEffect(() => {
         plugins.forEach((plugin) => {
             plugin.canvas = canvasRef.current
         })
@@ -47,7 +52,15 @@ const Paint = ({ command = 'pen', color = '#000000', lineWidth = 2, width = 800,
                 [plugin.name]: plugin
             })))
         )
+    }, [canvasRef.current, plugins])
 
+    useEffect(() => {
+        if(!canvasRef.current) return
+
+        canvasRef.current.width = width * scale
+        canvasRef.current.height = height * scale
+
+        canvasRef.current.getContext('2d').scale(scale, scale)
     }, [canvasRef.current, scale])
 
     const handleDrawStart = useCallback((e) => {
@@ -105,7 +118,7 @@ const Paint = ({ command = 'pen', color = '#000000', lineWidth = 2, width = 800,
         })
 
         setDrawing(false)
-    }, [canvasRef, currentCommand, currentColor, currentLineWidth, currentPlugins])
+    }, [canvasRef, currentCommand, currentColor, currentLineWidth, currentPlugins, drawing])
 
     return (
         <canvas ref={canvasRef} onMouseDown={handleDrawStart} onMouseMove={hanldeDrawing} onMouseUp={handleDrawFinish} 

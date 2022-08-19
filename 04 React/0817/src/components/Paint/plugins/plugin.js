@@ -11,7 +11,7 @@ export class Plugin{
     draw(data) {
         const context = this.canvas.getContext('2d')
 
-        context.globalCompositeOpertation = 'source-over'
+        context.globalCompositeOperation = 'source-over'
         context.strokeStyle = data.color
         context.lineCap = 'round'
         context.lineJoin = 'round'
