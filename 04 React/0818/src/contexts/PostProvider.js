@@ -23,12 +23,17 @@ const reducer = (state, action) => {
     }
 }
 
-const PostProvider = ({ children, initialPosts, handleDeletePost }) => {
+const PostProvider = ({ children, initialPosts, handleDeletePost, handleAddPost }) => {
     const [posts, dispatch] = useReducer(reducer, initialPosts || [])
 
     useEffect(() => {
         dispatch({ type: 'INIT_POSTS', payload: initialPosts || []})
     }, [initialPosts])
+
+    const onAddPost = useCallback(async (post) => {
+        const payload = await handleAddPost(post)
+        dispatch({ type: 'ADD_POST', payload})
+    }, [handleAddPost])
 
     const onDeletePost = useCallback(async (id) => {
         const payload = await handleDeletePost(id)
@@ -36,7 +41,7 @@ const PostProvider = ({ children, initialPosts, handleDeletePost }) => {
     }, [handleDeletePost])
 
     return (
-        <PostContext.Provider value={{ posts, onDeletePost }}>{children}</PostContext.Provider>
+        <PostContext.Provider value={{ posts, onDeletePost, onAddPost }}>{children}</PostContext.Provider>
     )
 }
 
