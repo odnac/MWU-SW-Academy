@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react"
+import { Link } from "react-router-dom"
 import { usePostContext } from "../../../contexts/PostProvider"
 import  Header  from "../../Header"
 import Spinner from "../../Spinner"
-import  Text  from "../../Text/Text"
 
 const PostItem = ({ post }) => {
     const [loading, setLoading] = useState(false)
@@ -19,7 +19,7 @@ const PostItem = ({ post }) => {
             <Header strong level={3}>
                 {post.title}
             </Header>
-            <Text>{post.body}</Text>
+            <Link to={`/posts/${post.id}`}>Detail--</Link>
             <div>
                 {loading ? <Spinner/> : <button onClick={() => handleDeletePost(post.id)}>Delete</button>}
             </div>
