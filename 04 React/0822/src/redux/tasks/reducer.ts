@@ -1,6 +1,6 @@
 import { Action, Task } from "./types";
 
-export const tasks = (state: Task[], action: Action) => {
+export const tasks = (state: Task[] = [], action: Action) => {
     switch(action.type) {
         case 'ADD_TASK': {
             const newTask = action.payload
