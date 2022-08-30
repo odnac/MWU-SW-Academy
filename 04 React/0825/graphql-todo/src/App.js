@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
 import styled from "@emotion/styled"
 import { Header } from "./components/Header";
+import { NewTaskForm } from "./components/NewTaskForm";
 
 const Container = styled.div`
   width: 400px;
@@ -17,6 +18,7 @@ function App() {
     <ApolloProvider client={client}>
       <Container>
         <Header>ToDo</Header>
+        <NewTaskForm />
       </Container>
     </ApolloProvider>
   );
