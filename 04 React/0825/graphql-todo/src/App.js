@@ -2,6 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
 import styled from "@emotion/styled"
 import { Header } from "./components/Header";
 import { NewTaskForm } from "./components/NewTaskForm";
+import { TaskList } from "./components/TaskList";
 
 const Container = styled.div`
   width: 400px;
@@ -19,6 +20,7 @@ function App() {
       <Container>
         <Header>ToDo</Header>
         <NewTaskForm />
+        <TaskList/>
       </Container>
     </ApolloProvider>
   );
