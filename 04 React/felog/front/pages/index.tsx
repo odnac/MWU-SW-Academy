@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 
 const GET_POSTS = gql`
   query GetPosts {
-    posts {
+    post {
       data {
         id
         attributes {
