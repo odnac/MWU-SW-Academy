@@ -44,13 +44,13 @@ const SignUp = () => {
         const elements: FormElements = e.currentTarget
         const email = elements.email.value
         const password = elements.password.value
-        
+
         const result = await login({ variables: { email, password }})
         nookies.set(null, 'token', result.data.login.jwt, { path: '/' })
         toggleLoading(false)
         router.push("/")
     }, [toggleLoading, router, login])
-    
+
     return (
         <Container size="xsmall" padding={16} co={{ marginTop: 16 }}>
             <Heading strong level={3} align="center">Login</Heading>

@@ -1,5 +1,5 @@
 {
-  "name": "front",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,6 @@
     "@apollo/client": "^3.6.9",
     "@co-design/core": "^0.7.14",
     "@co-design/hooks": "^0.6.5",
-    "@strapi/plugin-graphql": "^4.3.6",
     "graphql": "^16.6.0",
     "next": "12.2.5",
     "nookies": "^2.5.2",
@@ -20,7 +19,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.7.14",
+    "@types/node": "18.7.15",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "eslint": "8.23.0",
