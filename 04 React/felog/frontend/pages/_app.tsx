@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { AppShell, CoProvider } from '@co-design/core'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
 import { Header } from '../components'
+import nookies from 'nookies'
 
 const client = new ApolloClient({
   uri: 'http://localhost:1337/graphql',
@@ -10,7 +11,7 @@ const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const header = <AppShell.Header height={70}>
-    <Header />
+    <Header token={pageProps.token}/>
   </AppShell.Header>
 
   return (
@@ -22,6 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </CoProvider>
     </ApolloProvider>
   )
+}
+
+MyApp.getInitailProps = async (appCtx: AppContext) => {
+  const { token } = nookies.get(appCtx.ctx)
+  return { pageProps: { token } }
 }
 
 export default MyApp
