@@ -1,13 +1,30 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { AppShell, CoProvider } from '@co-design/core'
 import type { AppContext, AppProps } from 'next/app'
 import { Header } from '../components'
+import { setContext } from '@apollo/client/link/context'
 import nookies from 'nookies'
 
+const httpLink = createHttpLink({
+  uri: "http://localhost:1337/graphql",
+})
+
+const authLink = setContext((_, { headers }) => {
+  const { token } = nookies.get()
+
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : ''
+    }
+  }
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const header = <AppShell.Header height={70}>

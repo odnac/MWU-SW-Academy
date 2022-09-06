@@ -4,7 +4,7 @@ import nookies from 'nookies'
 import { useRouter } from "next/router"
 
 interface Props {
-    token? : string
+    token?: string
 }
 
 export const Header = ({ token }: Props) => {
